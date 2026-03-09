@@ -1,25 +1,25 @@
 /**
- * @typedef {Object} conditionalPoint
+ * @typedef {Object} ConditionalPoint
  * @property {number} point
  * @property {string} label
  */
 
 /**
  *
- * @param {conditionalPoint[]} conditionalPoints
+ * Create a function that return strings on given positions on a array from 1 to N.
  *
- * @return {function(number): string[]}
+ * @param {ConditionalPoint[]} conditionalPoints
+ *
+ * @returns {function(number): string[]}
  *
  */
 export function createParametricalFizzBuzz(conditionalPoints) {
   return (n) =>
     Array.from({ length: n }, (_, i) => i + 1).map((number) => {
-      let string = "";
-      for (const { point, label } of conditionalPoints) {
-        if (number % point === 0) {
-          string += label;
-        }
-      }
+      let string = conditionalPoints
+        .filter(({ point }) => number % point === 0)
+        .map(({ label }) => label)
+        .join("");
 
       if (string.length === 0) return number.toString();
 
