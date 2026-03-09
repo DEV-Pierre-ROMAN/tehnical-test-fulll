@@ -1,4 +1,23 @@
 /**
+ * @typedef {Object} conditionalPoint
+ * @property {number} point
+ * @property {string} label
+ */
+
+/**
+ *
+ * @param {conditionalPoint[]} conditionalPoints
+ *
+ * @return {function(number): string[]}
+ *
+ */
+export function createParametricalFizzBuzz(conditionalPoints) {
+  /**
+   * @todo implement createParametricalFizzBuzz
+   */
+}
+
+/**
  *
  * @param {number} n - param named N in reference to the instruction of the test
  *
@@ -16,7 +35,7 @@ export function fizzBuzz(n) {
       string += "Buzz";
     }
 
-    if (string.length === 0) return number;
+    if (string.length === 0) return number.toString();
 
     return string;
   });
