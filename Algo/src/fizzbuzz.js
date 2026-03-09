@@ -12,9 +12,19 @@
  *
  */
 export function createParametricalFizzBuzz(conditionalPoints) {
-  /**
-   * @todo implement createParametricalFizzBuzz
-   */
+  return (n) =>
+    Array.from({ length: n }, (_, i) => i + 1).map((number) => {
+      let string = "";
+      for (const { point, label } of conditionalPoints) {
+        if (number % point === 0) {
+          string += label;
+        }
+      }
+
+      if (string.length === 0) return number.toString();
+
+      return string;
+    });
 }
 
 /**
@@ -25,18 +35,16 @@ export function createParametricalFizzBuzz(conditionalPoints) {
  *
  */
 export function fizzBuzz(n) {
-  return Array.from({ length: n }, (_, i) => i + 1).map((number) => {
-    let string = "";
-    if (number % 3 === 0) {
-      string += "Fizz";
-    }
+  const CLASSICAL_FIZZBUZZ_CONDITIONNAL_POINT = [
+    {
+      point: 3,
+      label: "Fizz",
+    },
+    {
+      point: 5,
+      label: "Buzz",
+    },
+  ];
 
-    if (number % 5 === 0) {
-      string += "Buzz";
-    }
-
-    if (string.length === 0) return number.toString();
-
-    return string;
-  });
+  return createParametricalFizzBuzz(CLASSICAL_FIZZBUZZ_CONDITIONNAL_POINT)(n);
 }
