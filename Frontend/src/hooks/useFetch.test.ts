@@ -4,6 +4,7 @@ import { useFetch } from "./useFetch";
 describe("useFetch()", () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it("happy path : return data on success", async () => {
@@ -83,13 +84,8 @@ describe("useFetch()", () => {
   });
 
   it("Edge Case 2: signal aborting", () => {
-    const abortSpy = vi.fn();
-    const mockController = {
-      signal: {},
-      abort: abortSpy,
-    };
+    const abortSpy = vi.spyOn(AbortController.prototype, "abort");
 
-    vi.stubGlobal("AbortController", vi.fn().mockReturnValue(mockController));
     vi.stubGlobal("fetch", vi.fn().mockReturnValue(new Promise(() => {})));
 
     const { unmount } = renderHook(() =>
