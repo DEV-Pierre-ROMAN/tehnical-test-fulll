@@ -1,4 +1,6 @@
-import type { User } from "../types";
+import { toUser } from "../mappers/github";
+import type { GitHubUserResult, User } from "../types";
+import { useFetch } from "./useFetch";
 
 type GithubSearchOption = {
   page?: number;
@@ -14,17 +16,18 @@ type UserSearchState = {
 
 export function useUserSearch(
   query: string,
+  // options is only here to easily extends fonctionnality
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   options: GithubSearchOption = { page: 1, perPage: 30 },
 ): UserSearchState {
-  /**
-   * ToDo implement useUserSearch which use the fetch hook to fetch github users and format it
-   */
-  console.log(query, options);
+  const url = `https://api.github.com/search/users?q=${query}`;
+
+  const { data, loading, error } = useFetch<GitHubUserResult>(url);
 
   return {
-    data: [],
-    totalCount: 0,
-    loading: false,
-    error: null,
+    data: data?.items.map(toUser) ?? [],
+    totalCount: data?.total_count ?? 0,
+    loading,
+    error,
   };
 }
