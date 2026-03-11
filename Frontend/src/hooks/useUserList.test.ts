@@ -30,29 +30,29 @@ describe("useUserList()", () => {
 
   it("deleteUser", () => {
     const { result } = renderHook(() => useUserList(fakeUsers));
-    act(() => result.current.deleteUser("22222"));
+    act(() => result.current.deleteUsers(["22222"]));
     expect(result.current.users.length).toBe(1);
   });
 
   it("deleteUser non existing user", () => {
     const { result } = renderHook(() => useUserList(fakeUsers));
-    act(() => result.current.deleteUser("22223"));
+    act(() => result.current.deleteUsers(["22223"]));
     expect(result.current.users.length).toBe(2);
   });
 
-  it("duplicateUser", () => {
+  it("duplicateUsers", () => {
     const { result } = renderHook(() => useUserList(fakeUsers));
-    act(() => result.current.duplicateUser("22222"));
+    act(() => result.current.duplicateUsers(["22222"]));
     expect(result.current.users.length).toBe(3);
     expect(
       result.current.users.filter((user) => user.id === "22222-copy1").length,
     ).toBe(1);
   });
 
-  it("duplicateUser 2 times", () => {
+  it("duplicateUsers 2 times", () => {
     const { result } = renderHook(() => useUserList(fakeUsers));
-    act(() => result.current.duplicateUser("22222"));
-    act(() => result.current.duplicateUser("22222"));
+    act(() => result.current.duplicateUsers(["22222"]));
+    act(() => result.current.duplicateUsers(["22222"]));
     expect(result.current.users.length).toBe(4);
     expect(
       result.current.users.filter((user) => user.id === "22222-copy1").length,
@@ -62,16 +62,41 @@ describe("useUserList()", () => {
     ).toBe(1);
   });
 
+  it("duplicateUsers duplicate multiple", () => {
+    const { result } = renderHook(() => useUserList(fakeUsers));
+    act(() => result.current.duplicateUsers(["11111", "22222"]));
+    expect(result.current.users.length).toBe(4);
+    expect(
+      result.current.users.filter((user) => user.id === "11111-copy1").length,
+    ).toBe(1);
+    expect(
+      result.current.users.filter((user) => user.id === "22222-copy1").length,
+    ).toBe(1);
+  });
+
   it("duplicateUser duplicate a copy", () => {
     const { result } = renderHook(() => useUserList(fakeUsers));
-    act(() => result.current.duplicateUser("22222"));
-    act(() => result.current.duplicateUser("22222-copy1"));
+    act(() => result.current.duplicateUsers(["22222"]));
+    act(() => result.current.duplicateUsers(["22222-copy1"]));
     expect(result.current.users.length).toBe(4);
     expect(
       result.current.users.filter((user) => user.id === "22222-copy1").length,
     ).toBe(1);
     expect(
       result.current.users.filter((user) => user.id === "22222-copy2").length,
+    ).toBe(1);
+  });
+
+  it("duplicateUser duplicate multiple on copies", () => {
+    const { result } = renderHook(() => useUserList(fakeUsers));
+    act(() => result.current.duplicateUsers(["22222"]));
+    act(() => result.current.duplicateUsers(["22222-copy1", "22222"]));
+    expect(result.current.users.length).toBe(5);
+    expect(
+      result.current.users.filter((user) => user.id === "22222-copy2").length,
+    ).toBe(1);
+    expect(
+      result.current.users.filter((user) => user.id === "22222-copy3").length,
     ).toBe(1);
   });
 

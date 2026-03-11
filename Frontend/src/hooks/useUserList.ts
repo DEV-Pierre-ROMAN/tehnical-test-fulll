@@ -3,8 +3,8 @@ import type { User } from "../types";
 
 type UserListState = {
   users: User[];
-  deleteUser: (id: string) => void;
-  duplicateUser: (id: string) => void;
+  deleteUsers: (ids: string[]) => void;
+  duplicateUsers: (ids: string[]) => void;
   addUser: (user: User) => void;
   setUsers: (users: User[]) => void;
 };
@@ -14,30 +14,35 @@ export const SUFFIX_COPY = "copy";
 export function useUserList(initialUsers: User[] = []): UserListState {
   const [users, setUsers] = useState(initialUsers);
 
-  const deleteUser = (id: string) => {
-    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+  const deleteUsers = (ids: string[]) => {
+    setUsers((prevUsers) => prevUsers.filter((user) => !ids.includes(user.id)));
   };
 
-  const duplicateUser = (id: string) => {
+  const duplicateUsers = (ids: string[]) => {
     setUsers((prevUsers) => {
-      const user = prevUsers.find((user) => user.id === id);
-      if (!user) return prevUsers;
+      const newUsers = [...prevUsers];
 
-      // we get the part without "copy"
-      const cleanId = user.id.split("-")[0];
+      for (const id of ids) {
+        const user = newUsers.find((user) => user.id === id);
+        if (!user) continue;
 
-      const existingCopyNumbers = prevUsers
-        .filter((user) => user.id.startsWith(cleanId + "-"))
-        .map((user) =>
-          parseInt(user.id.replace(`${cleanId}-${SUFFIX_COPY}`, ""), 10),
-        );
+        // we get the part without "copy"
+        const cleanId = user.id.split("-")[0];
 
-      const nextSuffixe =
-        existingCopyNumbers.length > 0
-          ? Math.max(...existingCopyNumbers) + 1
-          : 1;
-      const newId = `${cleanId}-${SUFFIX_COPY}${nextSuffixe}`;
-      return [...prevUsers, { ...user, id: newId }];
+        const existingCopyNumbers = newUsers
+          .filter((user) => user.id.startsWith(cleanId + "-"))
+          .map((user) =>
+            parseInt(user.id.replace(`${cleanId}-${SUFFIX_COPY}`, ""), 10),
+          );
+
+        const nextSuffixe =
+          existingCopyNumbers.length > 0
+            ? Math.max(...existingCopyNumbers) + 1
+            : 1;
+        const newId = `${cleanId}-${SUFFIX_COPY}${nextSuffixe}`;
+        newUsers.push({ ...user, id: newId });
+      }
+      return newUsers;
     });
   };
 
@@ -47,8 +52,8 @@ export function useUserList(initialUsers: User[] = []): UserListState {
 
   return {
     users,
-    deleteUser,
-    duplicateUser,
+    deleteUsers,
+    duplicateUsers,
     addUser,
     setUsers,
   };
