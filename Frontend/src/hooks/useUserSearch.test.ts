@@ -48,7 +48,7 @@ describe("useUserSearch()", () => {
 
     const mappedResult = {
       login: "[userName]",
-      id: 11111,
+      id: "11111",
       avatar_url: "https://avatars.githubusercontent.com/u/11111?v=4",
       url: "https://github.com/[userName]",
     };

@@ -45,7 +45,7 @@ describe("useUserList()", () => {
     act(() => result.current.duplicateUser("22222"));
     expect(result.current.users.length).toBe(3);
     expect(
-      result.current.users.filter((user) => user.id === "22222-copy").length,
+      result.current.users.filter((user) => user.id === "22222-copy1").length,
     ).toBe(1);
   });
 
@@ -55,7 +55,7 @@ describe("useUserList()", () => {
     act(() => result.current.duplicateUser("22222"));
     expect(result.current.users.length).toBe(4);
     expect(
-      result.current.users.filter((user) => user.id === "22222-copy").length,
+      result.current.users.filter((user) => user.id === "22222-copy1").length,
     ).toBe(1);
     expect(
       result.current.users.filter((user) => user.id === "22222-copy2").length,
@@ -65,10 +65,10 @@ describe("useUserList()", () => {
   it("duplicateUser duplicate a copy", () => {
     const { result } = renderHook(() => useUserList(fakeUsers));
     act(() => result.current.duplicateUser("22222"));
-    act(() => result.current.duplicateUser("22222-copy"));
+    act(() => result.current.duplicateUser("22222-copy1"));
     expect(result.current.users.length).toBe(4);
     expect(
-      result.current.users.filter((user) => user.id === "22222-copy").length,
+      result.current.users.filter((user) => user.id === "22222-copy1").length,
     ).toBe(1);
     expect(
       result.current.users.filter((user) => user.id === "22222-copy2").length,
