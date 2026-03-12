@@ -10,6 +10,12 @@ type FetchOptions = {
   mapError?: (response: Response) => Error;
 };
 
+const cache = new Map<string, unknown>();
+
+export function clearCache(): void {
+  // ToDo implement a clearCache
+}
+
 export function useFetch<T>(
   url: string,
   options: FetchOptions = {},
