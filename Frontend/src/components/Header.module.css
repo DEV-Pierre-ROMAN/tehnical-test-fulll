@@ -1,0 +1,12 @@
+.header {
+  height: max(64px, 4rem);
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
