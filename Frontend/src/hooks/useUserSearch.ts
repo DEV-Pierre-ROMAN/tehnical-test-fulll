@@ -1,5 +1,6 @@
 import { toUser } from "../mappers/github";
 import type { GitHubUserResult, User } from "../types";
+import { mapGithubError } from "../utils/errors/githubErrors";
 import { useFetch } from "./useFetch";
 
 type GithubSearchOption = {
@@ -22,7 +23,9 @@ export function useUserSearch(
 ): UserSearchState {
   const url = `https://api.github.com/search/users?q=${query}`;
 
-  const { data, loading, error } = useFetch<GitHubUserResult>(url);
+  const { data, loading, error } = useFetch<GitHubUserResult>(url, {
+    mapError: (response) => mapGithubError(response),
+  });
 
   return {
     data: data?.items.map(toUser) ?? [],

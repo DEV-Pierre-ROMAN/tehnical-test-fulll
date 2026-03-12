@@ -6,7 +6,14 @@ type FetchState<T> = {
   error: Error | null;
 };
 
-export function useFetch<T>(url: string): FetchState<T> {
+type FetchOptions = {
+  mapError?: (response: Response) => Error;
+};
+
+export function useFetch<T>(
+  url: string,
+  options: FetchOptions = {},
+): FetchState<T> {
   const [state, setState] = useState<FetchState<T>>({
     data: null,
     loading: true,
@@ -24,7 +31,10 @@ export function useFetch<T>(url: string): FetchState<T> {
       const signal = controller.signal;
       try {
         const result = await fetch(url, { signal });
-        if (!result.ok) throw new Error(`HTTP error: ${result.status}`);
+        if (!result.ok)
+          throw options.mapError
+            ? options.mapError(result)
+            : new Error(`HTTP error: ${result.status}`);
         const data = await result.json();
         setState({ data, loading: false, error: null });
       } catch (error) {
