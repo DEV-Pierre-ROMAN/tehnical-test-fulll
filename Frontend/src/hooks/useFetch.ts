@@ -63,9 +63,5 @@ export function useFetch<T>(
     return () => controller.abort();
   }, [url]);
 
-  /**
-   * ToDo: fetching url in param with signal abort and return the result
-   */
-
   return state;
 }
