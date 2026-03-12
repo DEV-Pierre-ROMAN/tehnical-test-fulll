@@ -8,6 +8,7 @@ type FetchState<T> = {
 
 type FetchOptions = {
   mapError?: (response: Response) => Error;
+  enabled?: boolean;
 };
 
 const cache = new Map<string, unknown>();
@@ -26,7 +27,13 @@ export function useFetch<T>(
     error: null,
   });
 
+  const enabled = options.enabled ?? true;
+
   useEffect(() => {
+    if (!enabled) {
+      setState({ data: null, loading: false, error: null });
+      return;
+    }
     if (cache.has(url)) {
       setState({ data: cache.get(url) as T, loading: false, error: null });
       return;
@@ -61,7 +68,7 @@ export function useFetch<T>(
     fetchData();
 
     return () => controller.abort();
-  }, [url]);
+  }, [url, enabled]);
 
   return state;
 }

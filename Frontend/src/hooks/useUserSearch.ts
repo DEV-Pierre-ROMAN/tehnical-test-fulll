@@ -25,6 +25,7 @@ export function useUserSearch(
 
   const { data, loading, error } = useFetch<GitHubUserResult>(url, {
     mapError: (response) => mapGithubError(response),
+    enabled: query.trim().length > 0,
   });
 
   return {
