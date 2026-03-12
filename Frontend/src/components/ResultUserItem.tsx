@@ -1,20 +1,21 @@
+import { useSelectionContext } from "../contexts/SelectionContext/useSelectionContext";
 import type { User } from "../types";
 import styles from "./ResultUserItem.module.css";
 
 type ResultItemProps = {
   user: User;
-  isSelected: boolean;
-  onToggle: (id: string) => void;
 };
 
-export function ResultItem({ user, onToggle, isSelected }: ResultItemProps) {
+export function ResultItem({ user }: ResultItemProps) {
+  const { isSelected, toggleSelection } = useSelectionContext();
+
   return (
     <div className={styles.card}>
       <input
         className={styles.checkbox}
         type="checkbox"
-        checked={isSelected}
-        onChange={() => onToggle(user.id)}
+        checked={isSelected(user.id)}
+        onChange={() => toggleSelection(user.id)}
       />
       <img className={styles.avatar} src={user.avatar_url} alt={user.login} />
       <p className={styles.id}>{user.id}</p>
