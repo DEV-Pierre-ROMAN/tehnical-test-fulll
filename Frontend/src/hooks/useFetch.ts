@@ -13,7 +13,7 @@ type FetchOptions = {
 const cache = new Map<string, unknown>();
 
 export function clearCache(): void {
-  // ToDo implement a clearCache
+  cache.clear();
 }
 
 export function useFetch<T>(
@@ -27,6 +27,10 @@ export function useFetch<T>(
   });
 
   useEffect(() => {
+    if (cache.has(url)) {
+      setState({ data: cache.get(url) as T, loading: false, error: null });
+      return;
+    }
     const controller = new AbortController();
     const fetchData = async () => {
       setState({
@@ -42,6 +46,7 @@ export function useFetch<T>(
             ? options.mapError(result)
             : new Error(`HTTP error: ${result.status}`);
         const data = await result.json();
+        cache.set(url, data);
         setState({ data, loading: false, error: null });
       } catch (error) {
         if (error instanceof Error && error.name === "AbortError") return;
