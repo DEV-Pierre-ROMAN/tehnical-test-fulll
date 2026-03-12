@@ -1,4 +1,6 @@
 import type { User } from "../types";
+import { useSelection } from "./useSelection";
+import { useUserList } from "./useUserList";
 
 type UserManagerState = {
   users: User[];
@@ -13,15 +15,35 @@ type UserManagerState = {
 };
 
 export function useUserManager(initialUsers: User[]): UserManagerState {
+  const { users, deleteUsers, duplicateUsers } = useUserList(initialUsers);
+  const {
+    selectedIds,
+    toggleSelection,
+    selectMany,
+    unselectMany,
+    clearSelection,
+    isSelected,
+  } = useSelection();
+
+  const deleteSelected = () => {
+    deleteUsers([...selectedIds]);
+    clearSelection();
+  };
+
+  const duplicateSelected = () => {
+    duplicateUsers([...selectedIds]);
+    clearSelection();
+  };
+
   return {
-    users: [],
-    selectedIds: new Set<string>(),
-    isSelected: (id: string) => {},
-    toggleSelection: (id: string) => {},
-    selectMany: (id: string[]) => {},
-    unselectMany: (ids: string[]) => {},
+    users,
+    selectedIds,
+    isSelected,
+    toggleSelection,
+    selectMany,
+    unselectMany,
     clearSelection: () => {},
-    deleteSelected: () => {},
-    duplicateSelected: () => {},
+    deleteSelected,
+    duplicateSelected,
   };
 }
