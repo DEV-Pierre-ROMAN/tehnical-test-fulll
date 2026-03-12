@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type SelectionState = {
+export type SelectionState = {
   selectedIds: Set<string>;
   isSelected: (id: string) => boolean;
   toggleSelection: (id: string) => void;
