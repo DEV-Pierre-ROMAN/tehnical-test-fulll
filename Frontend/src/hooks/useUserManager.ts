@@ -5,7 +5,7 @@ import { useUserList } from "./useUserList";
 type UserManagerState = {
   users: User[];
   selectedIds: Set<string>;
-  isSelected: (id: string) => void;
+  isSelected: (id: string) => boolean;
   toggleSelection: (id: string) => void;
   selectMany: (ids: string[]) => void;
   unselectMany: (ids: string[]) => void;
