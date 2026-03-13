@@ -26,18 +26,8 @@
   object-fit: cover;
 }
 
-.id {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  margin: 0;
-  text-align: center;
-}
-
+.id,
 .login {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text);
-  margin: 0;
   text-align: center;
 }
 

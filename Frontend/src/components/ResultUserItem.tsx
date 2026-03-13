@@ -3,6 +3,7 @@ import type { User } from "../types";
 import styles from "./ResultUserItem.module.css";
 import { Button } from "./ui/Button";
 import { CheckBox } from "./ui/CheckBox";
+import { Typography } from "./ui/Typography";
 
 type ResultItemProps = {
   user: User;
@@ -19,8 +20,8 @@ export function ResultItem({ user }: ResultItemProps) {
         onChange={() => toggleSelection(user.id)}
       />
       <img className={styles.avatar} src={user.avatar_url} alt={user.login} />
-      <p className={styles.id}>{user.id}</p>
-      <p className={styles.login}>{user.login}</p>
+      <Typography variant="caption" className={styles.id}>{user.id}</Typography>
+      <Typography variant="h2" className={styles.login}>{user.login}</Typography>
       <Button
         as="a"
         className={styles.profileLink}

@@ -1,6 +1,7 @@
 import type { User } from "../types";
 import { ResultItem } from "./ResultUserItem";
 import styles from "./ResultList.module.css";
+import { Typography } from "./ui/Typography";
 
 type ResultListProps = {
   users: User[];
@@ -9,9 +10,9 @@ type ResultListProps = {
 };
 
 export function ResultList({ users, loading, error }: ResultListProps) {
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
-  if (users.length === 0) return <p>No results</p>;
+  if (loading) return <Typography variant="muted" className={styles.message}>Loading...</Typography>;
+  if (error) return <Typography variant="muted" className={styles.message}>{error.message}</Typography>;
+  if (users.length === 0) return <Typography variant="muted" className={styles.message}>No results</Typography>;
 
   return (
     <div className={styles.container}>
