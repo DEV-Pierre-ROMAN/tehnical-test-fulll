@@ -5,15 +5,15 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, max(100px, 10rem));
+  grid-template-columns: repeat(auto-fill, var(--card-width));
   justify-content: space-evenly;
-  gap: 2rem;
-  padding: 0.75rem;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-md);
 }
 
 .message {
-  padding: 1.5rem;
+  padding: var(--spacing-xl);
   text-align: center;
-  color: #666;
-  font-size: 1rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
 }

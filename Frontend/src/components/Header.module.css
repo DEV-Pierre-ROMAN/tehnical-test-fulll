@@ -1,12 +1,12 @@
 .header {
-  height: max(64px, 4rem);
-  background: #e0e0e0;
+  height: var(--header-height);
+  background: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
 }
