@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef, ElementType } from "react";
+import { type ComponentPropsWithRef, type ElementType, type Ref, forwardRef } from "react";
 import styles from "./Button.module.css";
 
 const variantStyles = {
@@ -12,18 +12,20 @@ type ButtonVariant = keyof typeof variantStyles;
 type ButtonProps<T extends ElementType = "button"> = {
   as?: T;
   variant?: ButtonVariant;
-} & ComponentPropsWithoutRef<T>;
+} & ComponentPropsWithRef<T>;
 
-export function Button<T extends ElementType = "button">({
-  as,
-  variant = "default",
-  className,
-  ...props
-}: ButtonProps<T>) {
+function ButtonInner<T extends ElementType = "button">(
+  { as, variant = "default", className, ...props }: ButtonProps<T>,
+  ref: Ref<Element>,
+) {
   const Component = as ?? "button";
   const classes = [styles.button, variantStyles[variant], className]
     .filter(Boolean)
     .join(" ");
 
-  return <Component {...props} className={classes} />;
+  return <Component {...props} ref={ref} className={classes} />;
 }
+
+export const Button = forwardRef(ButtonInner) as <T extends ElementType = "button">(
+  props: ButtonProps<T> & { ref?: Ref<Element> },
+) => JSX.Element;

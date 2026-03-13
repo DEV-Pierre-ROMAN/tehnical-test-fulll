@@ -10,6 +10,18 @@
   gap: var(--spacing-sm);
   box-sizing: border-box;
   box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.15s;
+}
+
+.card.selected,
+.card.selected:hover {
+  border-color: var(--color-primary);
+}
+
+.card:not(.selected):hover:not(:has(.profileLink:hover)) {
+  border-color: var(--color-border);
 }
 
 .checkbox {
@@ -29,6 +41,10 @@
 .id,
 .login {
   text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .profileLink {
