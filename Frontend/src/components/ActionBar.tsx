@@ -1,8 +1,7 @@
 import styles from "./ActionBar.module.css";
-import trashIcon from "../assets/icons/trash-2.svg";
-import copyIcon from "../assets/icons/copy.svg";
 import { CheckBox } from "./ui/CheckBox";
 import { Button } from "./ui/Button";
+import { Icon } from "./ui/Icon";
 
 type ActionBarProps = {
   selectedCount: number;
@@ -97,7 +96,7 @@ export function ActionBar({
           onClick={onDuplicate}
           disabled={!hasSelection}
         >
-          <img src={copyIcon} alt="" width="20" height="20" />
+          <Icon name="copy" />
         </Button>
         <Button
           variant="ghost"
@@ -105,7 +104,7 @@ export function ActionBar({
           onClick={onDelete}
           disabled={!hasSelection}
         >
-          <img src={trashIcon} alt="" width="20" height="20" />
+          <Icon name="trash" />
         </Button>
       </div>
     </div>
