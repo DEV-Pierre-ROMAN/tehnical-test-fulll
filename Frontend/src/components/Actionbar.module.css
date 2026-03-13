@@ -3,6 +3,45 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-sm) var(--spacing-md);
+  overflow: hidden;
+}
+
+.entering {
+  animation: slideDown 0.25s ease-out forwards;
+}
+
+.exiting {
+  animation: slideUp 0.25s ease-in forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 3rem;
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    max-height: 3rem;
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+  }
+  to {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .counter {

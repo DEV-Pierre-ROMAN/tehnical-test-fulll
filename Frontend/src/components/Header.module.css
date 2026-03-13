@@ -3,12 +3,30 @@
   background: var(--color-surface);
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: space-between;
+  padding: 0 var(--spacing-lg);
 }
 
-.themeToggle {
-  position: absolute;
-  right: var(--spacing-lg);
-  font-size: var(--font-size-xl);
+@media (min-width: 768px) {
+  .header {
+    justify-content: center;
+    position: relative;
+  }
+
+  .actions {
+    position: absolute;
+    right: var(--spacing-lg);
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.separator {
+  width: 1px;
+  height: 1.25rem;
+  background: var(--color-border);
 }
