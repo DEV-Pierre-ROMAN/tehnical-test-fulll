@@ -13,15 +13,6 @@ export const SUFFIX_COPY = "copy";
 
 export function useUserList(initialUsers: User[] = []): UserListState {
   const [users, setUsers] = useState(initialUsers);
-  const [prevSourceUser, setPrevSourceUser] = useState(
-    JSON.stringify(initialUsers),
-  );
-
-  const serialized = JSON.stringify(initialUsers);
-  if (serialized !== prevSourceUser) {
-    setPrevSourceUser(serialized);
-    setUsers(initialUsers);
-  }
 
   const deleteUsers = (ids: string[]) => {
     setUsers((prevUsers) => prevUsers.filter((user) => !ids.includes(user.id)));

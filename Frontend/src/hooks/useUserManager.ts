@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { User } from "../types";
 import { useSelection } from "./useSelection";
 import { useUserList } from "./useUserList";
@@ -15,7 +16,8 @@ type UserManagerState = {
 };
 
 export function useUserManager(initialUsers: User[]): UserManagerState {
-  const { users, deleteUsers, duplicateUsers } = useUserList(initialUsers);
+  const { users, deleteUsers, duplicateUsers, setUsers } =
+    useUserList(initialUsers);
   const {
     selectedIds,
     toggleSelection,
@@ -24,6 +26,17 @@ export function useUserManager(initialUsers: User[]): UserManagerState {
     clearSelection,
     isSelected,
   } = useSelection();
+
+  const [prevSourceUser, setPrevSourceUser] = useState(
+    JSON.stringify(initialUsers),
+  );
+
+  const serialized = JSON.stringify(initialUsers);
+  if (serialized !== prevSourceUser) {
+    setPrevSourceUser(serialized);
+    setUsers(initialUsers);
+    clearSelection();
+  }
 
   const deleteSelected = () => {
     deleteUsers([...selectedIds]);
@@ -42,7 +55,7 @@ export function useUserManager(initialUsers: User[]): UserManagerState {
     toggleSelection,
     selectMany,
     unselectMany,
-    clearSelection: () => {},
+    clearSelection,
     deleteSelected,
     duplicateSelected,
   };
