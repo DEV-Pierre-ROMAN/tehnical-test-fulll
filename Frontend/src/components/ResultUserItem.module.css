@@ -15,8 +15,6 @@
   position: absolute;
   top: var(--spacing-sm);
   left: var(--spacing-sm);
-  width: var(--font-size-md);
-  height: var(--font-size-md);
   cursor: pointer;
 }
 

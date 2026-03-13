@@ -1,6 +1,7 @@
 import { useSelectionContext } from "../contexts/SelectionContext/useSelectionContext";
 import type { User } from "../types";
 import styles from "./ResultUserItem.module.css";
+import { CheckBox } from "./ui/CheckBox";
 
 type ResultItemProps = {
   user: User;
@@ -11,9 +12,8 @@ export function ResultItem({ user }: ResultItemProps) {
 
   return (
     <div className={styles.card}>
-      <input
+      <CheckBox
         className={styles.checkbox}
-        type="checkbox"
         checked={isSelected(user.id)}
         onChange={() => toggleSelection(user.id)}
       />
