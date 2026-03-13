@@ -1,0 +1,17 @@
+.container {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--card-width));
+  justify-content: space-evenly;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-md);
+}
+
+.message {
+  padding: var(--spacing-xl);
+  text-align: center;
+}

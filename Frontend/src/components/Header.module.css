@@ -1,0 +1,14 @@
+.header {
+  height: var(--header-height);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.themeToggle {
+  position: absolute;
+  right: var(--spacing-lg);
+  font-size: var(--font-size-xl);
+}
