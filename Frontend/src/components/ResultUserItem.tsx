@@ -32,6 +32,7 @@ export function ResultItem({ user }: ResultItemProps) {
         <CheckBox
           className={`${styles.checkbox} ${checkboxVisible ? styles.checkboxEntering : styles.checkboxExiting}`}
           checked={isSelected(user.id)}
+          onClick={(e) => e.stopPropagation()}
           onChange={() => toggleSelection(user.id)}
         />
       )}
