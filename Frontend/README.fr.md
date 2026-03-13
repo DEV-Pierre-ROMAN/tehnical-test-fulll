@@ -42,7 +42,7 @@ N'ayant pas acces a des librairies de state management comme Zustand, la gestion
 
 ### Styles et composants UI
 
-A defaut de pouvoir utiliser Tailwind et shadcn/ui, le styling repose sur des **CSS Modules** : une approche legere et bien adaptee a la taille du projet, qui garantit le scoping des styles et une separation claire par composant.
+A defaut de pouvoir utiliser Tailwind et shadcn/ui, le styling repose sur des **CSS Modules** : une approche legere et bien adaptee a la taille du projet, qui garantit le scoping des styles et une separation claire par composant. Un systeme de **design tokens** (CSS custom properties) centralise les couleurs, espacements, typographies et ombres, garantissant une coherence visuelle sur l'ensemble de l'application et permettant le changement de theme de maniere fluide.
 
 Une petite bibliotheque de **composants UI reutilisables** (`Button`, `CheckBox`, `Toggle`, `Typography`, `Icon`) a ete creee en s'inspirant de shadcn/ui et Radix UI. Ces composants ne contiennent aucune logique metier et exposent un systeme de **variants** precodees, permettant une utilisation declarative et coherente a travers l'application.
 
