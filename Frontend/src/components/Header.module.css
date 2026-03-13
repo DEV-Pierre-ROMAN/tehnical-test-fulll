@@ -3,13 +3,23 @@
   background: var(--color-surface);
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: space-between;
+  padding: 0 var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .header {
+    justify-content: center;
+    position: relative;
+  }
+
+  .actions {
+    position: absolute;
+    right: var(--spacing-lg);
+  }
 }
 
 .actions {
-  position: absolute;
-  right: var(--spacing-lg);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
