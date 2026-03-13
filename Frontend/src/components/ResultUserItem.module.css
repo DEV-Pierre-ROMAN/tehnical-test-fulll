@@ -10,17 +10,20 @@
   gap: var(--spacing-sm);
   box-sizing: border-box;
   box-shadow: var(--shadow-sm);
-  cursor: pointer;
   border: 2px solid transparent;
   transition: border-color 0.15s;
 }
 
-.card.selected,
-.card.selected:hover {
+.card.editable {
+  cursor: pointer;
+}
+
+.card.editable.selected,
+.card.editable.selected:hover {
   border-color: var(--color-primary);
 }
 
-.card:not(.selected):hover:not(:has(.profileLink:hover)) {
+.card.editable:not(.selected):hover:not(:has(.profileLink:hover)) {
   border-color: var(--color-border);
 }
 
@@ -29,6 +32,36 @@
   top: var(--spacing-sm);
   left: var(--spacing-sm);
   cursor: pointer;
+}
+
+.checkboxEntering {
+  animation: checkboxAppear 0.3s ease-out;
+}
+
+.checkboxExiting {
+  animation: checkboxDisappear 0.25s ease-in forwards;
+}
+
+@keyframes checkboxAppear {
+  from {
+    transform: scale(0.8) rotate(45deg);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes checkboxDisappear {
+  from {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8) rotate(-45deg);
+    opacity: 0;
+  }
 }
 
 .avatar {

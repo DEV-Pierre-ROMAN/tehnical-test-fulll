@@ -7,8 +7,16 @@
   position: relative;
 }
 
-.themeToggle {
+.actions {
   position: absolute;
   right: var(--spacing-lg);
-  font-size: var(--font-size-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.separator {
+  width: 1px;
+  height: 1.25rem;
+  background: var(--color-border);
 }

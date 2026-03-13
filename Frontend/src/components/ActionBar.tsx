@@ -10,6 +10,7 @@ type ActionBarProps = {
   onDelete: () => void;
   onSelectAll: () => void;
   onClearSelection: () => void;
+  className?: string;
 };
 
 type SelectAllCheckboxLabelProps = {
@@ -78,11 +79,12 @@ export function ActionBar({
   onDelete,
   onSelectAll,
   onClearSelection,
+  className,
 }: ActionBarProps) {
   const hasSelection = selectedCount > 0;
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className ?? ""}`}>
       <SelectAllCheckboxLabel
         selectedCount={selectedCount}
         totalCount={totalCount}
