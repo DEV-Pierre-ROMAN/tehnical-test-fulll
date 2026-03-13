@@ -44,7 +44,7 @@ Without access to state management libraries like Zustand, shared state manageme
 
 ### Styles and UI components
 
-Without access to Tailwind and shadcn/ui, styling relies on **CSS Modules**: a lightweight approach well-suited to the project's size, ensuring style scoping and clear separation per component.
+Without access to Tailwind and shadcn/ui, styling relies on **CSS Modules**: a lightweight approach well-suited to the project's size, ensuring style scoping and clear separation per component. A **design token** system (CSS custom properties) centralizes colors, spacing, typography and shadows, ensuring visual consistency across the entire application and enabling seamless theme switching.
 
 A small library of **reusable UI components** (`Button`, `CheckBox`, `Toggle`, `Typography`, `Icon`) was built, inspired by shadcn/ui and Radix UI. These components contain no business logic and expose a system of pre-built **variants**, enabling declarative and consistent usage across the application.
 
