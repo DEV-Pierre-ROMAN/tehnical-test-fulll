@@ -10,6 +10,8 @@
   --color-text-secondary: #666666;
   --color-border: #cccccc;
 
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -46,4 +48,5 @@
   --color-text: #e0e0e0;
   --color-text-secondary: #a0a0a0;
   --color-border: #3a3a5c;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
 }

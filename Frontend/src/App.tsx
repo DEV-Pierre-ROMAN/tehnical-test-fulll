@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import styles from "./App.module.css";
+import { SelectionProvider } from "./contexts/SelectionContext/SelectionProvider";
+import { useUserSearch } from "./hooks/useUserSearch";
+import { useUserManager } from "./hooks/useUserManager";
+import { Header } from "./components/Header";
+import { SearchBar } from "./components/SearchBar";
+import { ActionBar } from "./components/ActionBar";
+import { ResultList } from "./components/ResultList";
+import { useDebounce } from "./hooks/useDebounce";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 300);
+
+  const { data, loading, error } = useUserSearch(debouncedQuery, {});
+  const {
+    users,
+    selectedIds,
+    isSelected,
+    toggleSelection,
+    selectMany,
+    unselectMany,
+    clearSelection,
+    deleteSelected,
+    duplicateSelected,
+  } = useUserManager(data ?? []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <SelectionProvider
+      value={{
+        selectedIds,
+        isSelected,
+        toggleSelection,
+        selectMany,
+        unselectMany,
+        clearSelection,
+      }}
+    >
+      <div className={styles.layout}>
+        <Header />
+        <div className={styles.searchbarWrapper}>
+          <SearchBar value={query} onChange={setQuery} />
+        </div>
+
+        <ActionBar
+          onClearSelection={clearSelection}
+          selectedCount={selectedIds.size}
+          totalCount={users.length}
+          onDuplicate={duplicateSelected}
+          onSelectAll={() => selectMany(users.map((u) => u.id))}
+          onDelete={deleteSelected}
+        />
+        <div className={styles.resultWrapper}>
+          <ResultList users={users} loading={loading} error={error} />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </SelectionProvider>
+  );
 }
 
-export default App
+export default App;

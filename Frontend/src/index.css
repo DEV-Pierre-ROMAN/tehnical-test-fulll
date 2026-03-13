@@ -28,3 +28,26 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-surface-hover);
+}

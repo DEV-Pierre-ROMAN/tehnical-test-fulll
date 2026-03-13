@@ -1,0 +1,24 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  height: 100vh;
+}
+
+.resultWrapper {
+  flex: 1;
+  overflow: auto;
+}
+
+.searchbarWrapper {
+  padding: 0 var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+@media (min-width: 768px) {
+  .searchbarWrapper {
+    width: max(50%, 500px);
+  }
+}
