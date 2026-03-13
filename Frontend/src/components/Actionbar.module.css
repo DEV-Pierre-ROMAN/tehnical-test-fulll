@@ -13,57 +13,11 @@
   font-size: var(--font-size-md);
 }
 
-.counter input[type="checkbox"] {
-}
-
-.counter input[type="checkbox"]::before {
-  content: "";
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
-  flex-grow: 0;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  margin-right: 0.5em;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50% 50%;
-}
-.counter input[type="checkbox"]:checked::before {
-  border-color: var(--color-primary);
-  background-color: var(--color-primary);
-  background-image: url("");
-}
-
-.counter label,
-.counter input[type="checkbox"],
-.counter button {
+.counter label {
   cursor: pointer;
-}
-
-.counter input[type="checkbox"].partialSelection::before {
 }
 
 .actions {
   display: flex;
   gap: var(--spacing-sm);
-}
-
-.button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--spacing-xs);
-  border-radius: var(--radius-sm);
-  opacity: 1;
-}
-
-.button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.button:hover:not(:disabled) {
-  background: var(--color-surface);
 }
